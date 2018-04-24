@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       default-init-method="init"
+       default-destroy-method="destroy">
+
+    <bean id="helloWorld" class="com.jalon.springsample.ioc.HelloWorld">
+        <property name="message" value="Hello helloWorld.."/>
+    </bean>
+
+    <!-- A bean definition with lazy init set on -->
+    <bean id="helloWorldLazy" class="com.jalon.springsample.ioc.HelloWorld" lazy-init="true">
+        <property name="message" value="Hello helloWorld.."/>
+    </bean>
+
+    <!-- A bean definition with initialization method -->
+    <!-- A bean definition with singleton scope -->
+    <!-- 如果你有太多具有相同名称的初始化或者销毁方法的 Bean，那么你不需要在每一个 bean 上声明初始化方法和销毁方法。
+    框架使用 beans  父元素中的 default-init-method 和 default-destroy-method 属性提供了灵活地配置这种情况.
+    会执行所有xml bean元素的中的init destroy方法
+         default-init-method="init"
+         default-destroy-method="destroy" -->
+    <bean id="helloWorldLifeCycle" class="com.jalon.springsample.ioc.HelloWorldLifeCycle"
+          init-method="init"
+          destroy-method="destroy">
+        <property name="message" value="Hello Spring.."/>
+    </bean>
+
+    <bean id="helloWorldSingleton" class="com.jalon.springsample.ioc.HelloWorld">
+        <property name="message" value="Hello helloWorld.."/>
+    </bean>
+
+    <!-- PostProcessor 与 init-method 方法类似，before相当于在init之前操作,after 在init之后操作 -->
+    <bean id="helloWorld2" class="com.jalon.springsample.ioc.HelloWorldLifeCycle"
+          init-method="init" destroy-method="destroy">
+        <property name="message" value="Hello World!"/>
+    </bean>
+
+    <bean class="com.jalon.springsample.ioc.HelloWorldPostProcessor"/>
+
+
+</beans>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--自动注入 byName Definition for textEditor bean -->
+    <bean id="textEditor" class="com.jalon.springsample.autodi.TextEditor"
+          autowire="byName">
+        <property name="name" value="ByName" />
+    </bean>
+
+    <!--自动注入 byType Definition for textEditor bean -->
+    <bean id="textEditor2" class="com.jalon.springsample.autodi.TextEditor"
+          autowire="byType">
+        <property name="name" value="ByType" />
+    </bean>
+
+    <!-- Definition for textEditor bean -->
+    <bean id="textEditor3" class="com.jalon.springsample.autodi.TextEditor"
+          autowire="constructor">
+        <constructor-arg value="Constructor"/>
+    </bean>
+
+    <!-- Definition for spellChecker bean -->
+    <bean id="spellChecker" class="com.jalon.springsample.autodi.SpellChecker">
+    </bean>
+</beans>

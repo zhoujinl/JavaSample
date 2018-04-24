@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Definition for spellChecker bean
+    当容器调用带有一组参数的类构造函数时，
+    基于构造函数的 DI 就完成了，其中每个参数代表一个对其他类的依赖。
+    -->
+    <bean id="spellChecker" class="com.jalon.springsample.di.SpellChecker">
+        <constructor-arg index="1" value="WAHO"/>
+        <constructor-arg index="0" value="12"/>
+    </bean>
+
+    <!-- Definition for textEditor bean -->
+    <bean id="textEditor" class="com.jalon.springsample.di.TextEditor" scope="singleton">
+        <constructor-arg ref="spellChecker"/>
+    </bean>
+
+    <!-- 设值注入  -->
+    <!-- Definition for textEditor bean -->
+    <bean id="textEditorBySet" class="com.jalon.springsample.di.TextEditor">
+        <property name="spellChecker" ref="spellChecker"/>
+    </bean>
+
+    <bean id="spellCheckerBySet" class="com.jalon.springsample.di.SpellChecker"
+    p:num="999">
+    </bean>
+
+    <bean id="textEditorBySet2" class="com.jalon.springsample.di.TextEditor"
+    p:spellChecker-ref="spellCheckerBySet">
+    </bean>
+
+
+    <!-- 设值注入 注入内部 Beans Definition for textEditor bean using inner bean -->
+    <bean id="textEditor2" class="com.jalon.springsample.di.TextEditor">
+        <property name="spellChecker">
+            <bean id="spellChecker" class="com.jalon.springsample.di.SpellChecker" p:num="888"/>
+        </property>
+    </bean>
+
+
+    <!-- 注入集合 Definition for javaCollection -->
+    <bean id="javaCollection" class="com.jalon.springsample.di.JavaCollection">
+        <!-- results in a setAddressList(java.util.List) call -->
+        <property name="addressList">
+            <list>
+                <ref bean="address"/>
+                <value>Pakistan</value>
+                <value>USA</value>
+                <value>USA</value>
+            </list>
+        </property>
+
+        <!-- results in a setAddressSet(java.util.Set) call -->
+        <property name="addressSet">
+            <set>
+                <value>INDIA</value>
+                <value>Pakistan</value>
+                <value>USA</value>
+                <value>USA</value>
+            </set>
+        </property>
+
+        <!-- results in a setAddressMap(java.util.Map) call -->
+        <property name="addressMap">
+            <map>
+                <entry key="1" value="INDIA"/>
+                <entry key="2" value="Pakistan"/>
+                <entry key="3" value="USA"/>
+                <entry key="4" value="USA"/>
+            </map>
+        </property>
+
+        <!-- results in a setAddressProp(java.util.Properties) call -->
+        <property name="addressProp">
+            <props>
+                <prop key="one">INDIA</prop>
+                <prop key="two">Pakistan</prop>
+                <prop key="three">USA</prop>
+                <prop key="four">USA</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="address" class="java.lang.String">
+        <constructor-arg type="java.lang.String" value="China"/>
+    </bean>
+</beans>

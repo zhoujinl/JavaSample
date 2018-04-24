@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:annotation-config/>
+
+    <!-- Required Definition for student bean -->
+    <bean id="student" class="com.jalon.springsample.annotation.Student">
+        <property name="name"  value="Zara" />
+        <!-- try without passing age and check the result -->
+        <property name="age"  value="11"/>
+    </bean>
+
+    <!-- AutoWired Definition for textEditor bean without constructor-arg  -->
+    <bean id="textEditor" class="com.jalon.springsample.annotation.TextEditor">
+    </bean>
+
+    <!-- Definition for spellChecker bean -->
+    <bean id="spellChecker" class="com.jalon.springsample.annotation.SpellChecker">
+    </bean>
+
+
+    <!-- AutoWired  -->
+    <!-- Qualifier  当同个类型有多个实例时，可能随机取一个-->
+    <!-- Definition for profile bean -->
+    <bean id="profileQualifier" class="com.jalon.springsample.annotation.ProfileQualifier">
+    </bean>
+
+    <!-- Definition for student2 bean -->
+    <bean id="student2" class="com.jalon.springsample.annotation.Student"
+          p:name="Nuha"
+          p:age="22">
+    </bean>
+
+    <!-- Definition for student1 bean -->
+    <bean id="student1" class="com.jalon.springsample.annotation.Student">
+        <property name="name"  value="Zara" />
+        <property name="age"  value="110"/>
+    </bean>
+
+
+
+</beans>
