@@ -1,4 +1,5 @@
 # SpringSample
+主类 MainApp 或 *Demo
 
 ## 参考文档 https://www.w3cschool.cn/wkspring/pesy1icl.html
 - Spring 概述 
