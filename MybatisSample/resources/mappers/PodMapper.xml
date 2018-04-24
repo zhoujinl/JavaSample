@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jalon.mybatis.mapper.PodMapper">
+
+    <!-- 内部关联  -->
+    <!-- 字段重名时需处理  -->
+    <resultMap id="resultPodList" type="Pod">
+    <id property="id" column="id" />
+    <result property="name" column="name" />
+    <association property="book" javaType="Book">
+        <id property="id" column="id" />
+        <result property="name" column="bname" />
+        <result property="price" column="price" />
+    </association>
+    </resultMap>
+
+    <select id="getPodBooksByInUnion" parameterType="int" resultMap="resultPodList">
+        select pod.id,pod.name,book.id,book.name as bname,book.price from pod,book
+        where pod.id=book.id and pod.id=#{id}
+    </select>
+
+    <!-- 外部关联 -->
+    <!-- 无需担心 字段重名  -->
+    <resultMap id="resultBook" type="Book">
+        <id property="id" column="id" />
+        <result property="name" column="bname" />
+        <result property="price" column="price" />
+    </resultMap>
+
+    <resultMap id="resultPod" type="Pod">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <association property="book" javaType="Book" resultMap="resultBook" />
+    </resultMap>
+
+    <select id="getPodBooksByOutUnion" parameterType="int" resultMap="resultPod">
+        select pod.id,pod.name,book.id,book.name as bname,book.price from pod,book
+        where pod.id=book.id and pod.id=#{id}
+    </select>
+
+    <!--  分页
+     mysql利用limit offset和pagesize来实现，而oracle利用rownum来实现。实现MyBatis的物理分页。
+    -->
+    <select id="getPodPagesByParams" parameterType="Params" resultMap="resultPod">
+        select pod.id,pod.name,book.id,book.name as bname,book.price from pod,book
+        where pod.id=book.id limit #{offset},#{pagesize}
+    </select>
+
+
+</mapper>

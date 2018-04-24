@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <typeAliases>
+        <typeAlias alias="User" type="com.jalon.mybatis.entity.User"/>
+        <typeAlias alias="Book" type="com.jalon.mybatis.entity.Book"/>
+        <typeAlias alias="Pod" type="com.jalon.mybatis.entity.Pod"/>
+        <typeAlias alias="Params" type="com.jalon.mybatis.entity.Params"/>
+
+    </typeAliases>
+
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="MANAGED"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://192.168.7.176:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root.123"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mappers/UserMapper.xml"/>
+        <mapper resource="mappers/BookMapper.xml"/>
+        <mapper resource="mappers/PodMapper.xml"/>
+    </mappers>
+</configuration>
