@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ *
  * Hello world!
+ *
  */
 public class App {
     public static void main(String[] args) throws IOException {
@@ -21,7 +23,7 @@ public class App {
                 new SqlSessionFactoryBuilder().build(inputStream);
 
         selectOne(sqlSessionFactory);
-        //useMapper(sqlSessionFactory);
+        useMapper(sqlSessionFactory);
     }
 
 
