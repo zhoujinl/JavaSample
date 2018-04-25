@@ -11,5 +11,5 @@ Spring core核心示例，包括IOC、AOP
 SpringMvc 结合 Mybatis
 
 ## TODO
-- SpringBoot
+- SpringBoot   https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
 - SpringCloud
